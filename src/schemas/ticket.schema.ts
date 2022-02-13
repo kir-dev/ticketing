@@ -1,10 +1,11 @@
-import { Document } from 'mongoose'
+import { Document, ObjectId } from 'mongoose'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 
-export type CreateTicketDto = {
+export type EditTicketDto = {
   title: string
   description: string
-  tags: string[]
+  labelIds: ObjectId[]
+  boardId: ObjectId[]
 }
 
 export type TicketDocument = Ticket & Document
@@ -18,10 +19,13 @@ export class Ticket {
   description: string
 
   @Prop()
-  tags: string[]
+  createdAt: number
 
   @Prop()
-  date: number
+  labelIds: ObjectId[]
+
+  @Prop()
+  boardId: ObjectId[]
 }
 
 export const TicketSchema = SchemaFactory.createForClass(Ticket)
